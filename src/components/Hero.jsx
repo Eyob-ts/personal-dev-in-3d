@@ -83,7 +83,7 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        Hi, I'm <span className="text-[#915eff]">Eyob Teshome</span>
+                        Hi, I'm <span className="text-[#2d8bd8]">Eyob Teshome</span>
                     </motion.h1>
                     
                     <motion.p 

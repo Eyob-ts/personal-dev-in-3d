@@ -43,6 +43,7 @@ import Experience from "./components/Experience";
 import Loader from "./components/Loader"; // Import the SVG loader
 import ParticleBackground from "./components/ParticleBackground";
 
+
 //import TestParticles from "./components/TestParticles";
 
 
@@ -78,6 +79,7 @@ const App = () => {
              
             <About />
             <Experience />
+            
             <Feedbacks />
             
             <div className="relative z-0">
