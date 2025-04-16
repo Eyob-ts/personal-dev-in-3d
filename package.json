@@ -11,13 +11,8 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-<<<<<<< HEAD
-    "@react-three/drei": "^9.1.2",
-    "@react-three/fiber": "^8.13.1",
-=======
     "@react-three/drei": "^9.76.1",
     "@react-three/fiber": "^9.1.2",
->>>>>>> 2c8ed749d71dc085aac155495993fea6346e68e6
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "framer-motion": "^12.5.0",
