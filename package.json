@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@react-three/drei": "^10.0.5",
+    "@react-three/drei": "^9.1.2",
     "@react-three/fiber": "^8.13.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
@@ -21,7 +21,9 @@
     "react-router-dom": "^7.4.0",
     "react-tilt": "^1.0.2",
     "react-vertical-timeline-component": "^3.5.3",
-    "three": "^0.164.0"
+    "three": "^0.175.0",
+    "troika-three-text": "^0.52.4",
+    "troika-three-utils": "^0.52.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
