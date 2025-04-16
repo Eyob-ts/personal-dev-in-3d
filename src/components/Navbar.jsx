@@ -25,7 +25,7 @@ const Navbar = () => {
 
     return ( 
         <nav className={`
-        ${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary ${!visible ? 'transform -translate-y-full' : ''}`}>
+        ${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-black ${!visible ? 'transform -translate-y-full' : ''}`}>
             <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
                 <Link to = "/"
                 className="flex items-center gap-2 " 
@@ -34,7 +34,7 @@ const Navbar = () => {
                     window.scrollTo(0,0)
                 }}>
                     <img src={logo} alt="logo" className="w-9 h-9 object-contain"/>
-                <p className="text-white text-[18px] font-bold cursor-pointer">
+                <p className="text-white text-[18px] font-mono cursor-pointer">
                     Eyob Teshome <span className="sm:block hidden">| fullstack developer</span>
                 </p>
                 </Link>
@@ -42,7 +42,7 @@ const Navbar = () => {
                     {navLinks.map((link)=>(
                         <li key={link.id}>
                             <Link
-                                className="text-white text-[16px] hover:text-secondary transition-all duration-300 ease-in-out"
+                                className="text-white font-mono text-[16px] hover:text-secondary transition-all duration-300 ease-in-out"
                                 to={link.id}
                                 onClick={()=>{
                                     setActive(link.id)

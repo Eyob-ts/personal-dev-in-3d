@@ -1,76 +1,4 @@
 
-// import { useEffect, useState } from "react";
-// import { Particles, initParticlesEngine } from "@tsparticles/react";
-// import { loadSlim } from "@tsparticles/slim"; // <-- Must import!
-
-// const ParticleBackground = () => {
-//   const [init, setInit] = useState(false);
-
-//   useEffect(() => {
-//     console.log("Initializing particles..."); // Debug
-//     initParticlesEngine(async (engine) => {
-//       try {
-//         await loadSlim(engine);
-//         console.log("Engine loaded successfully!"); // Debug
-//       } catch (error) {
-//         console.error("Failed to load engine:", error); // Debug
-//       }
-//     }).then(() => {
-//       console.log("Particles ready!"); // Debug
-//       setInit(true);
-//     });
-//   }, []);
-
-//   if (!init) {
-//     console.log("Waiting for initialization..."); // Debug
-//     return null;
-//   }
-
-//   return (
-//     <Particles
-//       id="tsparticles"
-//       options={{
-//         background: { color: "#162138" },
-//         fpsLimit: 120,
-//         interactivity: {
-//           events: {
-//             onClick: { enable: true, mode: "push" },
-//             onHover: { enable: true, mode: "repulse" },
-//           },
-//           modes: {
-//             push: { quantity: 4 },
-//             repulse: { distance: 90 },
-//           },
-//         },
-//         particles: {
-//           color: { value: "#ffffff" },
-//           links: {
-//             color: "#ffffff",
-//             distance: 150,
-//             enable: true,
-//             opacity: 0.5,
-//             width: 1,
-//           },
-//           move: { enable: true },
-//           number: {
-//             density: { enable: true, area: 800 },
-//             value: 250, // <-- Ensure particles exist!
-//           },
-//           opacity: { value: 0.5 },
-//           size: { value: { min: 1, max: 3 } },
-//         },
-//       }}
-//       style={{
-//         position: "absolute",
-//         inset: 0,
-//         zIndex: -1,
-//         backgroundColor: "#162138", // Fallback
-//       }}
-//     />
-//   );
-// };
-
-// export default ParticleBackground;
 import { useEffect, useState } from "react";
 import { Particles, initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -99,7 +27,7 @@ const ParticleBackground = () => {
       <Particles
         id="hero-particles"
         options={{
-          background: { color: "transparent" },
+          background: { color: "black" },
           fpsLimit: 120,
           interactivity: {
             events: {

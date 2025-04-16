@@ -21,12 +21,12 @@ const ServiceCard =({index, title, icon})=>{
                     scale: 1.05,
                     speed: 450,
                  }}
-                 className="bg-tertiary  rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
+                 className="bg-gray-900 hover:bg-black hover:border-2 hover:border-secondary font-mono  rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
                 >
                     <img src={icon} alt={title}
                     className="w-16 h-16 object-contain "
                     />
-                    <h3 className="text-white text-[20px] font-bold text-center ">
+                    <h3 className="text-white text-[20px] font-mono text-center ">
                         {title}
 
                     </h3>
@@ -55,10 +55,10 @@ const About = () => {
                 </h2>
         </motion.div>
         <motion.p 
-    variants={fadeIn("", "", 0.1, 1)}
-    className="mt-4 text-secondary text-[17px] max-x-3xl leading-[30px]"
+    variants={fadeIn("", "", 0.1, 2)}
+    className="mt-4 text-secondary font-mono text-[17px] max-x-3xl leading-[30px]"
 >
-    Hey there! I’m <span className="text-blue-400">Eyob Teshome (Yob)</span>, your friendly neighborhood <span className="text-blue-400">full-stack web developer</span>! I whip up magic with the <span className="text-blue-300">MERN stack</span>, bring <span className="text-blue-400">3D models</span> to life using <span className="text-blue-400">Three.js</span>, and tame the robust <span className="text-blue-400">Laravel</span> framework like a pro. I graduated in <span className="text-accent">Information Systems</span>, and I’m all about crafting applications that are as stylish as they are functional.
+    Hey there! I’m <span className="text-blue-400 font-serif">Eyob Teshome (Yob)</span>, your friendly neighborhood <span className="text-blue-400">full-stack web developer</span>! I whip up magic with the <span className="text-blue-300">MERN stack</span>, bring <span className="text-blue-400">3D models</span> to life using <span className="text-blue-400">Three.js</span>, and tame the robust <span className="text-blue-400">Laravel</span> framework like a pro. I graduated in <span className="text-accent">Information Systems</span>, and I’m all about crafting applications that are as stylish as they are functional.
 
     When I’m not busy coding, you’ll find me on a <span className="text-highlight">coffee walk ☕</span>—because let’s be real, great ideas brew best over a cup of delicious Ethiopian coffee! I thrive on the thrill of <span className="text-blue-500">responsibility</span>, always eager to tackle new challenges and make technology work wonders.
 

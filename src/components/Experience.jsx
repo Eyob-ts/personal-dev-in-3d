@@ -11,7 +11,7 @@ const ExperienceCard = ({ experience, index }) => {
       <div className="absolute w-4 h-4 rounded-full bg-[#915EFF] -left-2 top-1" />
       
       {/* Content */}
-      <div className="bg-[#1d1836] p-6 rounded-lg shadow-lg">
+      <div className="bg-gray-900 hover:border-white hover:bg-black hover:scale-90 hover:duration-150 border-2 border-[#915EFF] p-6 rounded-lg shadow-lg">
         <div className="flex items-center gap-4 mb-4">
           <div 
             className="w-12 h-12 rounded-full flex items-center justify-center"
@@ -24,14 +24,14 @@ const ExperienceCard = ({ experience, index }) => {
             />
           </div>
           <div>
-            <h3 className="text-white text-xl font-bold">{experience.title}</h3>
+            <h3 className="text-white text-xl font-Merriweather">{experience.title}</h3>
             <p className="text-secondary">{experience.company_name}</p>
           </div>
         </div>
-        <p className="text-gray-400 mb-2">{experience.date}</p>
+        <p className="text-gray-400 mb-2 font-mono">{experience.date}</p>
         <ul className="list-disc pl-5 space-y-2">
           {experience.points.map((point, i) => (
-            <li key={i} className="text-white-100 text-sm">
+            <li key={i} className="text-white-100 text-sm font-mono">
               {point}
             </li>
           ))}

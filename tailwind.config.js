@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['Merriweather', 'serif'],
+        mono: ['Oxygen Mono', 'monospace'],
+        sans: ['Roboto', 'sans-serif'],
+    },
       colors: {
         primary: "#050816",
         secondary: "#aaa6c3",
