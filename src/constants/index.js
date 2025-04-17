@@ -3,8 +3,7 @@ import {
   creator,
   web,
   javascript,
-  html,
-  css,
+ 
   reactjs,
   redux,
   meta,
@@ -54,14 +53,7 @@ const services = [
 ];
 
 const technologies = [
-  {
-    name: "HTML 5",
-    icon: html,
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-  },
+ 
   {
     name: "JavaScript",
     icon: javascript,
@@ -77,6 +69,10 @@ const technologies = [
   {
     name: "Tailwind CSS",
     icon: tailwind,
+  },
+  {
+    name: "Laravel",
+    icon: docker,
   },
   {
     name: "Node JS",
@@ -95,12 +91,8 @@ const technologies = [
     icon: git,
   },
   {
-    name: "figma",
+    name: "Graphql",
     icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
   },
 ];
 

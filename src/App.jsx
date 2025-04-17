@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import Experience from "./components/Experience";
 import Loader from "./components/Loader"; // Import the SVG loader
 import ParticleBackground from "./components/ParticleBackground";
+import TechStack from "./components/TechStack";
 
 
 
@@ -45,6 +46,7 @@ const App = () => {
              
             <About />
             <Experience />
+            <TechStack />
             
             <Feedbacks />
             
