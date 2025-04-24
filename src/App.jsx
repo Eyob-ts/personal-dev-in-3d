@@ -50,7 +50,7 @@ const App = () => {
             <TechStack />
             <Projects />
             
-            <Feedbacks />
+            {/* <Feedbacks /> */}
             
             <div className="relative z-0">
               <Contact />

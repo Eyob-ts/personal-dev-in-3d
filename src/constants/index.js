@@ -183,7 +183,7 @@ const projects = [
       },
     ],
     image: broker,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/Eyob-ts/Ethio-digital-broker.git",
   },
   {
     name: "personal finance Advisor",
@@ -210,7 +210,7 @@ const projects = [
       },
     ],
     image: finance,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/Eyob-ts/Personal-Finance-Advisor.git",
   },
   
 ];
