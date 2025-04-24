@@ -1,21 +1,19 @@
-
 import { motion } from "framer-motion";
 import { styles } from "../style";
 import MacBookComputer from "./canvas/Computers";
 import ParticleBackground from "./ParticleBackground";
 
+
 const Hero = () => {
     return ( 
         <section className="relative w-full h-screen mx-auto overflow-hidden">
             {/* Particle Background */}
-            <div className=" bg-[#000000] absolute inset-0 w-full h-full overflow-hidden z-0">
+            <div className="bg-[#000000] absolute inset-0 w-full h-full overflow-hidden z-0">
                 <ParticleBackground />
             </div>
            
             {/* Content Container */}
             <div className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-row items-start gap-5 z-10`}>
-                
-                
                 {/* Text Content */}
                 <div className="flex-1 mb-2">
                     <motion.h1 
@@ -42,7 +40,9 @@ const Hero = () => {
             {/* 3D Model and Scroll Indicator */}
             <div className="absolute inset-0 w-full h-full right-0 z-20">
                 <MacBookComputer />
-                <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
+                
+                {/* Scroll Indicator */}
+                <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center z-40">
                     <a href="#about" aria-label="Scroll to about section">
                         <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
                             <motion.div
