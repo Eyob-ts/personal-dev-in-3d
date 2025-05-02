@@ -34,7 +34,7 @@ const MacBookModel = ({ setLoading, isMobile }) => {
           <Html transform distanceFactor={1.17} position={[0, 1.56, -1.4]} rotation-x={-0.256}>
             {!isIframeLoaded && (
               <div className="flex items-center justify-center w-[1024px] h-[670px] bg-black">
-                <span className="text-white text-lg animate-pulse">Loading website...</span>
+                <span className="text-gray-100 text-lg animate-pulse">Loading website...</span>
               </div>
             )}
             <iframe
