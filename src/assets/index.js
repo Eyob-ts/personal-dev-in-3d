@@ -25,6 +25,10 @@ import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
+import lekene from "./lekene.png";
+import site from "./site.png";
+import recitelabs from "./recitelabs.png"
+
 
 
 
@@ -54,6 +58,8 @@ export {
   starbucks,
   tesla,
   broker,
-  finance
-
+  finance,
+  lekene,
+  site,
+  recitelabs,
 };

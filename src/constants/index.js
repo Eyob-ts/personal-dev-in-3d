@@ -17,7 +17,11 @@ import {
   shopify,
   tesla,
   broker,
-
+  lekene,
+  site,
+  recitelabs,
+  
+  
   
   threejs,
   finance,
@@ -99,8 +103,8 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Ecommerce Laravel Backend",
-    company_name: "kurazTech",
+    title: "Personal Finance Advisor",
+    company_name: "Addisway",
     icon: starbucks,
     iconBg: "#383E56",
     date: "2024",
@@ -125,6 +129,20 @@ const experiences = [
       "Collaborated with designers, PMs, and developers to create high-quality products.",
       "Implemented responsive design and ensured cross-browser compatibility.",
       "Participated in team meetings to brainstorm innovative solutions for workflow automation.",
+    ],
+  },
+  {
+    title: "Full Stack Developer (Laravel + React TS)",
+    company_name: "ReciteLabs",
+    icon: recitelabs,
+    iconBg: "#123456",
+    date: "2025 - Present",
+    points: [
+      "Building a modular, multi-tenant ERP system using Laravel, React with TypeScript, and Inertia.js.",
+      "Developed the Project Management module with dynamic task boards and filters.",
+      "Implemented the Inventory module to track products, variants, and attributes.",
+      "Working with Laravel enums, data classes, and best practices for maintainable code.",
+      "Collaborating with a cross-functional team to design scalable architecture.",
     ],
   },
 ];
@@ -211,6 +229,29 @@ const projects = [
     ],
     image: finance,
     source_code_link: "https://github.com/Eyob-ts/Personal-Finance-Advisor.git",
+  },
+  {
+    name: "ERP Management System",
+    description: "A modern ERP system built for SMEs using Laravel, React TypeScript, and Inertia.js. Includes Project Management and Inventory modules designed to streamline workflows and product tracking.",
+    tags: [
+      { name: "laravel", color: "pink-text-gradient" },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "typescript", color: "green-text-gradient" },
+      { name: "inertia", color: "blue-text-gradient" },
+    ],
+    image: site, // add/import in assets
+    source_code_link: "site.et", // leave empty if private
+  },
+  {
+    name: "Lekene.et",
+    description: "A live e-commerce platform for Ethiopian traditional clothes and accessories. Built for a real client with Laravel, React, and Tailwind CSS to deliver a seamless shopping experience.",
+    tags: [
+      { name: "laravel", color: "pink-text-gradient" },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "tailwind", color: "green-text-gradient" },
+    ],
+    image: lekene, // add/import in assets
+    source_code_link: "https://lekene.et", // use live link
   },
   
 ];

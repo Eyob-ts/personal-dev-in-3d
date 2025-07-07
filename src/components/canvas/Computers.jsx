@@ -39,7 +39,7 @@ const MacBookModel = ({ setLoading, isMobile }) => {
             )}
             <iframe
               className="w-[1024px] h-[670px] border-none"
-              src="https://flowcv.com/resume/s1sq8spobwkn"
+              src="https://lekene.et/"
               onLoad={() => setIsIframeLoaded(true)}
               style={{ display: isIframeLoaded ? "block" : "none" }}
             />
@@ -54,8 +54,8 @@ const MacBookModel = ({ setLoading, isMobile }) => {
           maxWidth={2}
           textAlign="center"
         >
-          Hi!
-           There
+          One Of
+           My Work
         </Text>
       </Float>
     </PresentationControls>
