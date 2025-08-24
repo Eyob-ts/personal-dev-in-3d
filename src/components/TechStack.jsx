@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import {
   javascript,
@@ -19,10 +18,10 @@ const technologies = [
   { name: "Redux Toolkit", icon: redux, category: "frontend" },
   { name: "Tailwind CSS", icon: tailwind, category: "frontend" },
   { name: "Three JS", icon: threejs, category: "frontend" },
-  { name: "Laravel", icon: docker, category: "backend" }, // Docker used as placeholder
+  { name: "Laravel", icon: docker, category: "backend" }, // Docker as placeholder
   { name: "Node JS", icon: nodejs, category: "backend" },
   { name: "MongoDB", icon: mongodb, category: "backend" },
-  { name: "Graphql", icon: figma, category: "backend" }, // Figma used as placeholder
+  { name: "Graphql", icon: figma, category: "backend" }, // Figma as placeholder
   { name: "git", icon: git, category: "tool" },
 ];
 
@@ -47,7 +46,9 @@ const TechCard = ({ title, techs, colorFrom, colorTo, glow }) => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <span className={`text-transparent bg-clip-text bg-gradient-to-r ${colorFrom} ${colorTo}`}>
+      <span
+        className={`text-transparent bg-clip-text bg-gradient-to-r ${colorFrom} ${colorTo}`}
+      >
         {title}
       </span>
     </motion.h3>
@@ -56,9 +57,14 @@ const TechCard = ({ title, techs, colorFrom, colorTo, glow }) => (
       {techs.map((tech, index) => (
         <motion.div
           key={tech.name}
-          className={`group p-4 w-full rounded-xl bg-gradient-to-br from-[#1f1f1f] to-[#2a2a2a] 
-          hover:from-[#0000] hover:to-[#0000] border border-transparent 
-          hover:${glow.border} hover:${glow.shadow} transition-all duration-500 ease-out`}
+          className={`
+            group p-6 w-full rounded-2xl
+            bg-white/10 backdrop-blur-xl
+            border border-white/20
+            shadow-lg shadow-black/30
+            hover:scale-105 hover:shadow-xl
+            transition-all duration-500 ease-out
+          `}
           variants={floatAnim(index)}
           initial="initial"
           animate="animate"
@@ -74,7 +80,9 @@ const TechCard = ({ title, techs, colorFrom, colorTo, glow }) => (
               alt={tech.name}
               className="w-14 h-14 sm:w-16 sm:h-16 object-contain mx-auto group-hover:scale-110 transition-transform duration-300"
             />
-            <div className={`absolute inset-0 ${glow.bg} rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 opacity-0 group-hover:opacity-100`} />
+            <div
+              className={`absolute inset-0 ${glow.bg} rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 opacity-0 group-hover:opacity-100`}
+            />
           </div>
           <motion.p
             className="text-white/80 text-center mt-3 text-xs sm:text-sm font-medium group-hover:text-white transition-colors duration-300"
@@ -89,46 +97,57 @@ const TechCard = ({ title, techs, colorFrom, colorTo, glow }) => (
 );
 
 const TechStack = () => {
-  const frontendTech = technologies.filter((tech) => tech.category === "frontend");
-  const backendTech = technologies.filter((tech) => tech.category === "backend");
+  const frontendTech = technologies.filter(
+    (tech) => tech.category === "frontend"
+  );
+  const backendTech = technologies.filter(
+    (tech) => tech.category === "backend"
+  );
 
   return (
-    <section className="py-16 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
-      <motion.h2
-        className="text-3xl sm:text-4xl font-mono text-white mb-12 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-          🚀 Tech Stack
-        </span>
-      </motion.h2>
+    <div className="relative overflow-hidden">
+      {/* glowing gradient blobs in background */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-3xl opacity-40 animate-pulse" />
+      <div className="absolute bottom-10 right-20 w-80 h-80 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-3xl opacity-40 animate-pulse" />
 
-      <TechCard
-        title="Frontend"
-        techs={frontendTech}
-        colorFrom="from-purple-400"
-        colorTo="to-pink-500"
-        glow={{
-          border: "border-purple-400/30",
-          shadow: "shadow-[0_0_30px_#ff00ff33]",
-          bg: "bg-purple-400/10",
-        }}
-      />
+      {/* content */}
+      <section className="relative py-16 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
+        <motion.h2
+          className="text-3xl sm:text-4xl font-mono text-white mb-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            🚀 Tech Stack
+          </span>
+        </motion.h2>
 
-      <TechCard
-        title="Backend"
-        techs={backendTech}
-        colorFrom="from-amber-400"
-        colorTo="to-orange-500"
-        glow={{
-          border: "border-amber-400/30",
-          shadow: "shadow-[0_0_30px_#ffaa0033]",
-          bg: "bg-amber-400/10",
-        }}
-      />
-    </section>
+        <TechCard
+          title="Frontend"
+          techs={frontendTech}
+          colorFrom="from-purple-400"
+          colorTo="to-pink-500"
+          glow={{
+            border: "border-purple-400/30",
+            shadow: "shadow-[0_0_30px_#ff00ff33]",
+            bg: "bg-purple-400/10",
+          }}
+        />
+
+        <TechCard
+          title="Backend"
+          techs={backendTech}
+          colorFrom="from-amber-400"
+          colorTo="to-orange-500"
+          glow={{
+            border: "border-amber-400/30",
+            shadow: "shadow-[0_0_30px_#ffaa0033]",
+            bg: "bg-amber-400/10",
+          }}
+        />
+      </section>
+    </div>
   );
 };
 
