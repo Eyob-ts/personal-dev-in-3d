@@ -38,7 +38,7 @@ const ParticleBackground = () => {
               },
               onHover: { 
                 enable: true, 
-                mode: "grab",
+                mode: "connect",
                 parallax: { enable: true, force: 60, smooth: 10 }
               },
             },
