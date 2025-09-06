@@ -19,7 +19,7 @@ const ServiceCard = ({ index, title, icon }) => {
             scale: 1.05,
             speed: 450,
           }}
-          className="relative overflow-hidden bg-gradient-to-br from-emerald-400/20 via-green-500/20 to-green-800/20 hover:from-emerald-400/30 hover:via-green-500/30 hover:to-green-800/30 hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] font-mono rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col transition-all duration-700 border border-white/10 backdrop-blur-xl before:absolute before:inset-0 before:bg-gradient-to-t before:from-white/5 before:to-transparent before:pointer-events-none glass-card"
+          className="relative overflow-hidden bg-gradient-to-br from-emerald-400/20 via-blue-500/20 to-blue-800/20 hover:from-emerald-400/30 hover:via-blue-500/30 hover:to-blue-800/30 hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] font-mono rounded-[20px] py-5 px-12 min-h-[190px] flex justify-evenly items-center flex-col transition-all duration-700 border border-white/10 backdrop-blur-xl before:absolute before:inset-0 before:bg-gradient-to-t before:from-white/5 before:to-transparent before:pointer-events-none glass-card"
         >
           {/* Subtle background pattern for glass effect */}
           <div className="absolute inset-0 opacity-20">
@@ -119,7 +119,7 @@ const About = () => {
 
       <motion.p
         variants={fadeIn("", "", 0.1, 2)}
-        className="mt-4 text-secondary font-mono text-[17px] max-w-3xl leading-[30px]"
+        className="mt-3 text-secondary font-mono text-[17px] max-w-full leading-[30px]"
       >
         Hey there! I'm <span className="text-blue-400 font-serif">Eyob Teshome (Yob)</span>, your friendly neighborhood{" "}
         <span className="text-blue-400">full-stack web developer</span>! I whip up magic with the{" "}

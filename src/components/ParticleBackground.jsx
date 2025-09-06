@@ -1,181 +1,198 @@
-import { useEffect, useState } from "react";
+/* ParticleBackground.jsx */
+import { useEffect, useState, useCallback } from "react";
 import { Particles, initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import { tsParticles } from "@tsparticles/engine"; // for shower helper
 
-const ParticleBackground = () => {
+export default function ParticleBackground() {
   const [init, setInit] = useState(false);
 
+  /* ---------- init engine ---------- */
   useEffect(() => {
-    let mounted = true;
+    let m = true;
+    initParticlesEngine(async (e) => loadSlim(e)).then(() => m && setInit(true));
+    return () => (m = false);
+  }, []);
 
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      if (mounted) setInit(true);
-    });
+  /* ---------- meteor-shower helper ---------- */
+  const meteorShower = useCallback(() => {
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    for (let i = 0; i < 30; i++) {
+      tsParticles.addEmitter("space-particles", {
+        position: { x: Math.random() * W, y: -20 },
+        rate: { delay: 0.05, quantity: 1 },
+        life: { duration: 0.2, count: 1 },
+        particles: {
+          shape: "star",
+          size: 2,
+          color: ["#ffffff", "#ffd54f"],
+          opacity: { start: 1, end: 0 },
+          life: { duration: 2 },
+          move: {
+            speed: { min: 5, max: 8 },
+            direction: 90 + Math.random() * 40, // 90-130°
+            outModes: "destroy",
+            trail: { enable: true, length: 12 }
+          }
+        }
+      });
+    }
+  }, []);
 
-    return () => {
-      mounted = false;
+  /* ---------- day-night cycle ---------- */
+  useEffect(() => {
+    let phase = 0;
+    const id = setInterval(() => {
+      phase = (phase + 1) % 360;
+      const bg = `hsl(${220 + phase * 0.2}, 40%, ${6 + phase * 0.05}%)`; // darker
+      const canv = document.querySelector("#space-particles canvas");
+      canv?.style.setProperty("background", bg);
+    }, 300);
+    return () => clearInterval(id);
+  }, []);
+
+  /* ---------- warp-drive easter-egg ---------- */
+  useEffect(() => {
+    let warp = false;
+    const onWheel = (e) => {
+      if (!e.shiftKey) return;
+      warp = true;
+      const opt = tsParticles.domItem(0)?.options;
+      if (opt) {
+        opt.particles.move.speed = { min: 10, max: 20 };
+        opt.particles.move.direction = "top";
+        opt.particles.move.trail.length = 40;
+      }
+      setTimeout(() => {
+        warp = false;
+        if (opt) {
+          opt.particles.move.speed = { min: 0.2, max: 0.8 };
+          opt.particles.move.direction = "none";
+          opt.particles.move.trail.length = 0;
+        }
+      }, 1500);
     };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    return () => window.removeEventListener("wheel", onWheel);
   }, []);
 
   if (!init) return null;
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-      <Particles
-        id="hero-particles"
-        options={{
-          background: {
-            color: "black",
-          },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onClick: { 
-                enable: true, 
-                mode: ["push", "repulse"] 
+    <>
+      <button
+        onClick={meteorShower}
+        className="fixed top-4 left-4 z-50 btn-primary"
+      >
+       
+      </button>
+
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <Particles
+          id="space-particles"
+          options={{
+            background: { color: "#040d18ff" }, // darker than #0d1b2a
+            fpsLimit: 120,
+            interactivity: {
+              events: {
+                onClick: { enable: true, mode: "trail" },
+                onHover: { enable: true, mode: "bubble" }
               },
-              onHover: { 
-                enable: true, 
-                mode: "connect",
-                parallax: { enable: true, force: 60, smooth: 10 }
-              },
-            },
-            modes: {
-              push: { 
-                quantity: 6,
-                particles: {
-                  size: {
-                    value: { min: 1, max: 3 },
-                    animation: {
+              modes: {
+                trail: {
+                  delay: 0.005,
+                  quantity: 2,
+                  particles: {
+                    color: "#64b5f6",
+                    size: 1,
+                    opacity: 1,
+                    life: { duration: 4 },
+                    links: {
                       enable: true,
-                      speed: 5,
-                      sync: true,
-                      startValue: "min",
-                      destroy: "max"
+                      distance: 120,
+                      color: "#64b5f6",
+                      opacity: 0.6,
+                      width: 0.8
                     }
                   }
-                }
-              },
-              repulse: { 
-                distance: 250, 
-                duration: 0.8,
-                factor: 100,
-                speed: 1,
-                maxSpeed: 50,
-                easing: "ease-out-expo"
-              },
-              grab: {
-                distance: 250,
-                links: { 
-                  opacity: 1,
-                  color: {
-                    value: "#fafafaff"
-                  },
-                  blink: true,
-                  consent: true,
-                  width: 2
                 },
-                lineLinked: {
-                  opacity: 0.8
+                bubble: {
+                  distance: 36,
+                  size: 0,
+                  particles: {
+                    number: { value: 8 },
+                    color: "#ffffff",
+                    size: 1,
+                    opacity: 1,
+                    life: { duration: 0.8 },
+                    move: { speed: 4, direction: "outside", outModes: "destroy" }
+                  }
+                }
+              }
+            },
+            particles: {
+              color: { value: ["#ffffff", "#ffd700", "#87ceeb", "#ff6b6b", "#4ecdc4"] },
+              links: { enable: false },
+              move: {
+                enable: true,
+                speed: { min: 0.2, max: 0.8 },
+                direction: "none",
+                outModes: "out"
+              },
+              number: { density: { enable: true, area: 800 }, value: 150 },
+              opacity: {
+                value: { min: 0.3, max: 1 },
+                animation: { enable: true, speed: 2, sync: false }
+              },
+              size: { value: { min: 1, max: 2 }, animation: { enable: true, speed: 2, sync: false } },
+              shape: { type: "star", options: { star: { sides: 5, inset: 2 } } },
+              rotate: { value: { min: 0, max: 360 }, animation: { enable: true, speed: { min: 5, max: 15 }, sync: false } },
+              twinkle: { particles: { enable: true, frequency: 0.005, opacity: 0.3 } },
+              zIndex: { value: { min: 0, max: 100 }, opacityRate: 0.5, sizeRate: 0.5, velocityRate: 0.5 }
+            },
+            /* ---------- nebula layer ---------- */
+            emitters: [
+              {
+                position: { x: 50, y: 50 },
+                rate: { delay: 0.25, quantity: 1 },
+                size: { width: 100, height: 100 },
+                life: { duration: 0, count: 0 },
+                particles: {
+                  number: { value: 12 },
+                  shape: "circle",
+                  size: { value: 250, random: { enable: true, minimumValue: 150 } },
+                  opacity: { value: 0.06, random: { enable: true, minimumValue: 0.03 } },
+                  color: { value: ["#0d47a1", "#6a1b9a", "#c2185b"] },
+                  move: { enable: true, speed: 0.2, direction: "none", outModes: "bounce", attract: { enable: true, rotateX: 300, rotateY: 300 } }
                 }
               },
-            },
-          },
-          particles: {
-            color: {
-              // Each particle picks a random color from this array
-              value: ["#7cca4fff", "#000000ff", "#ffffff", "#00b42dff", "#0059ffff"],
-            },
-            links: {
-              color: "#ffffff",
-              distance: 150,
-              enable: true,
-              opacity: 0.4,
-              width: 1.5,
-              blink: true,
-              consent: true,
-            },
-            move: {
-              enable: true,
-              speed: 2,
-              direction: "none",
-              outModes: { 
-                default: "bounce",
-                bottom: "bounce",
-                left: "bounce",
-                right: "bounce",
-                top: "bounce"
-              },
-              trail: {
-                enable: true,
-                length: 10,
-                fill: { color: "#000000" }
-              },
-            },
-            number: {
-              density: { 
-                enable: true, 
-                area: 800 
-              },
-              value: 60, // Slightly reduced for performance with larger particles
-            },
-            opacity: {
-              value: { min: 0.4, max: 0.9 }, // Increased opacity for better visibility
-              animation: {
-                enable: true,
-                speed: 1.5,
-                sync: false,
-              },
-            },
-            size: {
-              value: { min: 2, max: 6 }, // Increased size range
-              animation: {
-                enable: true,
-                speed: 3,
-                sync: false,
-              },
-            },
-            shape: {
-              type: ["circle", "square", "triangle"], // More variety in shapes
-              options: {
-                polygon: { sides: 5 },
-                character: { value: ["❤", "★", "♦", "♠"] }
+              /* ---------- fixed shooting-star emitter ---------- */
+              {
+                position: { x: -10, y: Math.random() * 50 },
+                rate: { delay: 4, quantity: 1 },
+                life: { duration: 0, count: 0 },
+                particles: {
+                  shape: "star",
+                  size: 2,
+                  color: ["#ffffff", "#ffd54f"],
+                  opacity: { start: 1, end: 0 },
+                  life: { duration: 2.5 },
+                  move: {
+                    speed: 6,
+                    direction: 110,
+                    outModes: "destroy",
+                    trail: { enable: true, length: 20 }
+                  }
+                }
               }
-            },
-            wobble: {
-              enable: true,
-              distance: 10,
-              speed: 2
-            },
-            rotate: {
-              value: { min: 0, max: 360 },
-              animation: {
-                enable: true,
-                speed: 5,
-                sync: false
-              }
-            },
-            shadow: {
-              enable: true,
-              color: "#000000",
-              blur: 5,
-              offset: { x: 3, y: 3 }
-            }
-          },
-          detectRetina: true,
-          motion: {
-            reduce: {
-              factor: 4,
-              value: true
-            }
-          }
-        }}
-        className="absolute inset-0 w-full h-full"
-      />
-    </div>
+            ],
+            detectRetina: true,
+            motion: { reduce: { factor: 4, value: true } }
+          }}
+          className="absolute inset-0 w-full h-full"
+        />
+      </div>
+    </>
   );
-};
-
-export default ParticleBackground;
+}

@@ -15,31 +15,33 @@ const Hero = () => {
             {/* Content Container */}
             <div className={`${styles.paddingX} absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-row items-start gap-5 z-10`}>
                 {/* Text Content */}
-                <div className="flex-1 mb-2">
-                    <motion.h1 
-                        className={`${styles.heroHeadText} text-white`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        Hi, I'm <span className="text-white">Eyob Teshome</span>
-                    </motion.h1>
-                    
-                    <motion.p 
-                        className={`${styles.heroSubText} mt-4 text-white-100 leading-relaxed`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                    >
-                        A Fullstack Developer<br className="sm:block hidden"/> 
-                        specializing in scalable, efficient solutions
-                    </motion.p>
-                </div>
+               <div className="flex-1 mb-2">
+  <motion.h1
+    className={`${styles.heroHeadText} text-white`}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    Hi, I’m <span className="text-white">Eyob Teshome</span>
+  </motion.h1>
+
+  <motion.p
+    className={`${styles.heroSubText} mt-4 text-white-100 leading-relaxed`}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.2, duration: 0.8 }}
+  >
+    
+    <br className="sm:block hidden" />
+    Let’s build something you’ll be proud of.
+  </motion.p>
+</div>
             </div>
 
             {/* 3D Model and Scroll Indicator */}
             <div className="absolute inset-0 w-full h-full right-0 z-20">
                 <MacBookComputer />
+                
                 
                 {/* Scroll Indicator */}
                 <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center z-40">

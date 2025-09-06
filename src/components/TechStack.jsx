@@ -10,6 +10,9 @@ import {
   threejs,
   git,
   figma,
+  laravel,
+  redis
+
 } from "../assets";
 
 const technologies = [
@@ -18,11 +21,14 @@ const technologies = [
   { name: "Redux Toolkit", icon: redux, category: "frontend" },
   { name: "Tailwind CSS", icon: tailwind, category: "frontend" },
   { name: "Three JS", icon: threejs, category: "frontend" },
-  { name: "Laravel", icon: docker, category: "backend" }, // Docker as placeholder
+  { name: "Laravel", icon: laravel, category: "backend" }, // Docker as placeholder
   { name: "Node JS", icon: nodejs, category: "backend" },
   { name: "MongoDB", icon: mongodb, category: "backend" },
   { name: "Graphql", icon: figma, category: "backend" }, // Figma as placeholder
   { name: "git", icon: git, category: "tool" },
+  { name: "Docker", icon: docker, category: "tool" },
+  { name: "caching Redis", icon: redis, category: "tool" },
+
 ];
 
 const floatAnim = (index) => ({
@@ -103,6 +109,8 @@ const TechStack = () => {
   const backendTech = technologies.filter(
     (tech) => tech.category === "backend"
   );
+  const toolTech = technologies.filter(
+    (tech) => tech.category === "tool");
 
   return (
     <div className="relative overflow-hidden">
@@ -138,6 +146,17 @@ const TechStack = () => {
         <TechCard
           title="Backend"
           techs={backendTech}
+          colorFrom="from-amber-400"
+          colorTo="to-orange-500"
+          glow={{
+            border: "border-amber-400/30",
+            shadow: "shadow-[0_0_30px_#ffaa0033]",
+            bg: "bg-amber-400/10",
+          }}
+        />
+        <TechCard
+          title="DevOps & Tools"
+          techs={toolTech}
           colorFrom="from-amber-400"
           colorTo="to-orange-500"
           glow={{
