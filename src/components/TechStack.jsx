@@ -116,7 +116,7 @@ const TechStack = () => {
     <div className="relative overflow-hidden">
       {/* glowing gradient blobs in background */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-3xl opacity-40 animate-pulse" />
-      <div className="absolute bottom-10 right-20 w-80 h-80 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-3xl opacity-40 animate-pulse" />
+      <div className="absolute bottom-[200px] right-20 w-80 h-80 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-3xl opacity-40 animate-pulse" />
 
       {/* content */}
       <section className="relative py-16 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">

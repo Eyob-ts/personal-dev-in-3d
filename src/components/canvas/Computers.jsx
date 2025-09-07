@@ -1,10 +1,20 @@
 import { Canvas } from "@react-three/fiber";
 import { useState, useEffect } from "react";
-import { Text, Html, Float, PresentationControls, useGLTF, ContactShadows, Preload } from "@react-three/drei";
+import {
+  Text,
+  Html,
+  Float,
+  PresentationControls,
+  useGLTF,
+  ContactShadows,
+  Preload,
+} from "@react-three/drei";
 import Loader from "../Loader"; // Your custom loader
 
 const MacBookModel = ({ setLoading, isMobile }) => {
-  const { scene } = useGLTF("https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf");
+  const { scene } = useGLTF(
+    "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf"
+  );
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,11 +40,22 @@ const MacBookModel = ({ setLoading, isMobile }) => {
           position={[0, 0.55, -1.15]}
         />
 
-        <primitive object={scene} scale={isMobile ? 1 : 1.5} position={isMobile ? [0, -3.25, -2.2] : [0, -3.25, -1.5]}>
-          <Html transform distanceFactor={1.17} position={[0, 1.56, -1.4]} rotation-x={-0.256}>
+        <primitive
+          object={scene}
+          scale={isMobile ? 1 : 1.5}
+          position={isMobile ? [0, -3.25, -2.2] : [0, -3.25, -1.5]}
+        >
+          <Html
+            transform
+            distanceFactor={1.17}
+            position={[0, 1.56, -1.4]}
+            rotation-x={-0.256}
+          >
             {!isIframeLoaded && (
               <div className="flex items-center justify-center w-[1024px] h-[670px] bg-black">
-                <span className="text-gray-100 text-lg animate-pulse">Loading website...</span>
+                <span className="text-gray-100 text-lg animate-pulse">
+                  Loading website...
+                </span>
               </div>
             )}
             <iframe
@@ -46,16 +67,17 @@ const MacBookModel = ({ setLoading, isMobile }) => {
           </Html>
         </primitive>
 
+        {/* ✅ Responsive Text */}
         <Text
           font="./Bangers-Regular.ttf"
-          fontSize={0.5}
-          position={[3, -0.75, 0.75]}
+          fontSize={isMobile ? 0.2 : 0.3}
+          position={isMobile ? [1.6, -1.5, 0.1] : [2.7, -0.7, 0.7]}
           rotation-y={-1.25}
-          maxWidth={2}
+          maxWidth={isMobile ? 1 : 4}
           textAlign="center"
         >
-          One Of
-           My Work
+          👈Go on,give it a spin{"\n"}
+          just don’t drop it💥
         </Text>
       </Float>
     </PresentationControls>
@@ -86,8 +108,6 @@ const MacBookComputer = () => {
     <div className="relative w-full h-screen">
       {isLoading && <Loader />}
       <Canvas style={{ touchAction: "none" }}>
-        {/* ❌ REMOVED Environment that causes error */}
-        {/* If you want lighting, add this instead: */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
 
@@ -99,8 +119,8 @@ const MacBookComputer = () => {
   );
 };
 
-useGLTF.preload("https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf");
+useGLTF.preload(
+  "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf"
+);
 
 export default MacBookComputer;
-
-
