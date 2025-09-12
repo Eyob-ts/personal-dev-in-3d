@@ -12,6 +12,7 @@ import Loader from "./components/Loader"; // Import the SVG loader
 import ParticleBackground from "./components/ParticleBackground";
 import TechStack from "./components/TechStack";
 import Projects from "./components/projects";
+import ChatWidget from "./components/ChatWidget";
 
 
 
@@ -54,6 +55,7 @@ const App = () => {
             
             <div className="relative z-0">
               <Contact />
+                 <ChatWidget />
             </div>
           </>
         )}
