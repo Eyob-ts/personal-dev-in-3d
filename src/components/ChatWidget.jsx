@@ -11,7 +11,7 @@ const ChatWidget = () => {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Hi there! 👋 I'm your virtual assistant. How can I help you today?",
+      text: "Hi there! 👋 I'm Eyob virtual assistant. what do you wanna know about Eyob?",
       timestamp: new Date(Date.now() - 60000),
       type: "text"
     }
