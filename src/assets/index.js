@@ -31,8 +31,8 @@ import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 import lekene from "./lekene.png";
 import site from "./site.png";
-import recitelabs from "./recitelabs.png"
-
+import recitelabs from "./recitelabs.png";
+import aicode from "./ai-code.png"
 
 
 
@@ -67,5 +67,6 @@ export {
   site,
   recitelabs,
   laravel,
-  redis
+  redis,
+  aicode
 };

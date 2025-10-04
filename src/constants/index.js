@@ -20,6 +20,7 @@ import {
   lekene,
   site,
   recitelabs,
+  aicode,
   
   
   
@@ -244,15 +245,26 @@ const projects = [
   },
   {
     name: "Lekene.et",
-    description: "A live e-commerce platform for Ethiopian traditional clothes and accessories. Built for a real client with Laravel, React, and Tailwind CSS to deliver a seamless shopping experience.",
+    description: " Tell this website how much you want to spend and this platform plans your day. Built for a real client with Laravel, React, and Tailwind CSS to deliver a seamless shopping experience.",
     tags: [
-      { name: "laravel", color: "pink-text-gradient" },
-      { name: "react", color: "blue-text-gradient" },
+      { name: " laravel Blade ", color: "pink-text-gradient" },
+      { name: "+react", color: "blue-text-gradient" },
       { name: "tailwind", color: "green-text-gradient" },
     ],
     image: lekene, // add/import in assets
     source_code_link: "https://lekene.et", // use live link
   },
+
+  {
+    name: "AI Code Reviewer ",
+    description: "An AI-powered code generator that transforms natural language prompts into functional code snippets. Built with React for the frontend and Node.js for the backend, leveraging OpenAI's GPT-3.5 API to deliver accurate and efficient coding solutions.",
+    tags: [
+      { name: "Laravel inertia", color: "pink-text-gradient"},
+      { name: "React ", color: "blue-text-gradient"},
+      { name: "docker ", color: "dark-text-gradient"},
+    ],
+    image: aicode,
+  }
   
 ];
 
