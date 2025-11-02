@@ -96,22 +96,32 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>OverView.</h2>
       </motion.div>
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 2)}
-        className="mt-3 text-secondary font-mono text-[17px] max-w-full leading-[30px]"
-      >
-        Hey there! I'm <span className="text-blue-400 font-serif">Eyob Teshome (Yob)</span>, your friendly neighborhood{" "}
-        <span className="text-blue-400">full-stack web developer</span>! I whip up magic with the{" "}
-        <span className="text-blue-300">MERN stack</span>, bring <span className="text-blue-400">3D models</span> to
-        life using <span className="text-blue-400">Three.js</span>, and tame the robust{" "}
-        <span className="text-blue-400">Laravel</span> framework like a pro. I graduated in{" "}
-        <span className="text-accent">Information Systems</span>, and I'm all about crafting applications that are as
-        stylish as they are functional. When I'm not busy coding, you'll find me on a{" "}
-        <span className="text-highlight">coffee walk ☕</span>—because let's be real, great ideas brew best over a cup
-        of delicious Ethiopian coffee! I thrive on the thrill of <span className="text-blue-500">responsibility</span>,
-        always eager to tackle new challenges and make technology work wonders. So, if you've got wild web or app ideas,
-        let's join forces and turn them into reality!
-      </motion.p>
+    <motion.p
+  variants={fadeIn("", "", 0.1, 2)}
+  className="mt-3 text-secondary font-mono text-[17px] max-w-full leading-[30px]"
+>
+  Hey there! I'm <span className="text-blue-400 font-serif">Eyob Teshome (Yob)</span>, your friendly neighborhood{" "}
+  <span className="text-blue-400">full-stack web developer</span>! I whip up magic with the{" "}
+  <span className="text-blue-300">MERN stack</span>, bring <span className="text-blue-400">3D models</span> to life
+  using <span className="text-blue-400">Three.js</span>, and tame the robust{" "}
+  <span className="text-blue-400">Laravel</span> framework like a pro. I graduated in{" "}
+  <span className="text-accent">Information Systems</span>, and I'm all about crafting applications that are as
+  stylish as they are functional. 
+
+  Recently, I've developed a strong interest in the world of{" "}
+  <span className="text-blue-400">Artificial Intelligence</span> and I'm eager to learn everything I can about it.
+  Right now, I'm diving into{" "}
+  <span className="text-blue-400">MCP (Model Context Protocol)</span> — exploring how it connects AI models,
+  applications, and context in powerful new ways. I’m excited to expand my skills in this field and see how AI can
+  enhance modern web development.
+
+  When I'm not busy coding, you'll find me on a{" "}
+  <span className="text-highlight">coffee walk ☕</span> — because let's be real, great ideas brew best over a cup
+  of delicious Ethiopian coffee! I thrive on the thrill of{" "}
+  <span className="text-blue-500">responsibility</span>, always eager to tackle new challenges and make technology
+  work wonders. So, if you've got wild web, app, or future AI ideas, let's join forces and turn them into reality!
+</motion.p>
+
 
       {/* Resume Button */}
       <div className="mt-6">
