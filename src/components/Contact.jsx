@@ -6,21 +6,21 @@ import emailjs from "@emailjs/browser"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, useGLTF } from "@react-three/drei"
 
-// 3D Model Component
-const ChairModel = () => {
-  const { scene } = useGLTF(
-    "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/chair-wood/model.gltf"
-  );
+// 3D Model Component - Temporarily disabled due to unavailable model URL
+// const ChairModel = () => {
+//   const { scene } = useGLTF(
+//     "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/chair-wood/model.gltf"
+//   );
 
-  return (
-    <primitive 
-      object={scene} 
-      scale={0.8}
-      position={[0, -1, 0]}
-      rotation={[0, -Math.PI / 4, 0]}
-    />
-  );
-};
+//   return (
+//     <primitive 
+//       object={scene} 
+//       scale={0.8}
+//       position={[0, -1, 0]}
+//       rotation={[0, -Math.PI / 4, 0]}
+//     />
+//   );
+// };
 
 const ContactForm = () => {
   const formRef = useRef()
@@ -50,37 +50,14 @@ const ContactForm = () => {
 
   return (
     <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 p-4">
-      {/* 3D Model Section - Completely separate from glass effect */}
-      <div className="h-80 lg:h-[500px] rounded-xl overflow-hidden relative group bg-gradient-to-br from-gray-900 to-gray-800">
-        {/* Canvas for 3D Model - No overlay effects */}
-        <Canvas
-          camera={{ position: [3, 2, 5], fov: 50 }}
-          shadows
-          className="absolute inset-0"
-        >
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} castShadow />
-          <directionalLight
-            position={[0, 10, 0]}
-            intensity={1.5}
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            shadow-camera-far={50}
-            shadow-camera-left={-10}
-            shadow-camera-right={10}
-            shadow-camera-top={10}
-            shadow-camera-bottom={-10}
-            color="#ffffff"
-          />
-          <ChairModel />
-          <OrbitControls
-            enableZoom={false}
-            autoRotate
-            autoRotateSpeed={1.5}
-            minPolarAngle={Math.PI / 6}
-            maxPolarAngle={Math.PI / 2}
-          />
-        </Canvas>
+      {/* 3D Model Section - Temporarily disabled due to unavailable model */}
+      <div className="h-80 lg:h-[500px] rounded-xl overflow-hidden relative group bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+        {/* Placeholder for 3D Model */}
+        <div className="text-center text-white/60">
+          <div className="text-6xl mb-4">🪑</div>
+          <p className="text-sm font-mono">3D Model Temporarily Unavailable</p>
+          <p className="text-xs mt-2 text-white/40">Check back soon for interactive 3D content</p>
+        </div>
 
         {/* Glass border effect ONLY - No blur on the content */}
         <div className="absolute inset-0 border-2 border-white/20 rounded-xl pointer-events-none"></div>
@@ -103,29 +80,6 @@ const ContactForm = () => {
             className="absolute bottom-1 right-1 w-1.5 h-1.5 bg-white/20 rounded-full animate-pulse"
             style={{ animationDelay: "0.5s" }}
           ></div>
-        </div>
-
-        {/* Interactive Chair Tooltip */}
-        <div className="group/tooltip absolute bottom-4 left-4 z-20">
-          <span className="text-white/90 text-sm font-mono cursor-help border-b border-dashed border-white/40 hover:text-amber-400 transition-colors bg-black/30 px-2 py-1 rounded">
-            🪑 Why a chair?
-          </span>
-          <div className="hidden group-hover/tooltip:block absolute bottom-full mb-2 p-3 bg-gray-900/95 text-xs rounded-lg border border-amber-400/50 max-w-xs shadow-lg">
-            <p className="mb-2 text-white/90">This isn't just any chair—it's a:</p>
-            <ul className="list-disc pl-5 space-y-1 text-white/80">
-              <li>Metaphor for "taking a seat" to chat</li>
-              <li>Reminder that good code needs solid foundations</li>
-              <li>Subtle flex that I can load 3D models</li>
-            </ul>
-            <p className="mt-2 text-[10px] text-white/60">
-              (Real talk: The developer who made this model did amazing work)
-            </p>
-          </div>
-        </div>
-
-        {/* Rotation Instruction */}
-        <div className="absolute bottom-4 right-4 text-white/90 text-sm font-mono z-20 bg-black/30 px-2 py-1 rounded">
-          Drag to rotate
         </div>
       </div>
 

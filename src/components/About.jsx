@@ -141,7 +141,7 @@ const About = () => {
         ))}
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .glass-card {
           background: rgba(107, 116, 119, 0.32);
           box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);

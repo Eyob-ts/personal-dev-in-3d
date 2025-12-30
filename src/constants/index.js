@@ -21,6 +21,8 @@ import {
   site,
   recitelabs,
   aicode,
+  typescript,
+  ideeza,
   
   
   
@@ -62,7 +64,7 @@ const technologies = [
  
   {
     name: "JavaScript",
-    icon: javascript,
+    icon: typescript,
   },
   {
     name: "React JS",
@@ -100,9 +102,41 @@ const technologies = [
     name: "Graphql",
     icon: figma,
   },
+  {
+    name: "TypeScript",
+    icon: typescript,
+  }
 ];
 
 const experiences = [
+ {
+    title: "Three.js and Frontend developer (Three.js + Next.js)",
+    company_name: "IDEEZA",
+    icon: ideeza,
+    iconBg: "#123456",
+    date: "2025 - Present",
+    points: [
+      "Contributed to a web-based PCB and 3D module editor platform",
+      "Worked extensively with Three.js for 3D visualization and interactive UI components",
+      "Debugged complex 3D scene, rendering, and canvas interaction behavior",
+      "Applied strong problem-solving and issue-identification skills throughout development",
+      "Collaborated with cross-functional teams to deliver high-quality, scalable solutions",
+    ],
+  },
+  {
+    title: "Full Stack Developer (Laravel + React TS)",
+    company_name: "ReciteLabs",
+    icon: recitelabs,
+    iconBg: "#123456",
+    date: "2025 - Present",
+    points: [
+      "Building a modular, multi-tenant ERP system using Laravel, React with TypeScript, and Inertia.js.",
+      "Developed the Project Management module with dynamic task boards and filters.",
+      "Implemented the Inventory module to track products, variants, and attributes.",
+      "Working with Laravel enums, data classes, and best practices for maintainable code.",
+      "Collaborating with a cross-functional team to design scalable architecture.",
+    ],
+  },
   {
     title: "Personal Finance Advisor",
     company_name: "Addisway",
@@ -130,20 +164,6 @@ const experiences = [
       "Collaborated with designers, PMs, and developers to create high-quality products.",
       "Implemented responsive design and ensured cross-browser compatibility.",
       "Participated in team meetings to brainstorm innovative solutions for workflow automation.",
-    ],
-  },
-  {
-    title: "Full Stack Developer (Laravel + React TS)",
-    company_name: "ReciteLabs",
-    icon: recitelabs,
-    iconBg: "#123456",
-    date: "2025 - Present",
-    points: [
-      "Building a modular, multi-tenant ERP system using Laravel, React with TypeScript, and Inertia.js.",
-      "Developed the Project Management module with dynamic task boards and filters.",
-      "Implemented the Inventory module to track products, variants, and attributes.",
-      "Working with Laravel enums, data classes, and best practices for maintainable code.",
-      "Collaborating with a cross-functional team to design scalable architecture.",
     ],
   },
 ];

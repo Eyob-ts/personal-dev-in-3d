@@ -23,16 +23,17 @@ import docker from "./tech/docker.png";
 import redis from "./tech/redis.png";
 import laravel from "./tech/laravel.png";
 import tailwind from "./tech/tailwind.png";
-import typescript from "./tech/typescript.png";
+import typescript from "./tech/TypeScript.png";
 import threejs from "./tech/threejs.svg";
 import meta from "./company/meta.png";
+import ideeza from "./company/ideeza.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 import lekene from "./lekene.png";
 import site from "./site.png";
 import recitelabs from "./recitelabs.png";
-import aicode from "./ai-code.png"
+import aicode from "./ai-code.png";
 
 
 
@@ -68,5 +69,7 @@ export {
   recitelabs,
   laravel,
   redis,
-  aicode
+  aicode,
+  ideeza,
+  
 };

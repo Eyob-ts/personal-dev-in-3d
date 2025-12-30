@@ -5,23 +5,23 @@ import {
   Html,
   Float,
   PresentationControls,
-  useGLTF,
   ContactShadows,
   Preload,
 } from "@react-three/drei";
 import Loader from "../Loader"; // Your custom loader
 
 const MacBookModel = ({ setLoading, isMobile }) => {
-  const { scene } = useGLTF(
-    "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf"
-  );
-  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+  // The GLTF model was hosted remotely and sometimes fails to resolve
+  // (net::ERR_NAME_NOT_RESOLVED). To avoid the portfolio hanging when
+  // the host is down, we no longer fetch the remote model here. Instead
+  // render a lightweight placeholder. If you want to re-enable the
+  // model later, restore the useGLTF call and the primitive below.
+  // no iframe/model loading state needed for placeholder
 
+  // Make sure loader is dismissed even when the model isn't loaded.
   useEffect(() => {
-    if (scene) {
-      setLoading(false);
-    }
-  }, [scene, setLoading]);
+    setLoading(false);
+  }, [setLoading]);
 
   return (
     <PresentationControls
@@ -40,32 +40,30 @@ const MacBookModel = ({ setLoading, isMobile }) => {
           position={[0, 0.55, -1.15]}
         />
 
-        <primitive
-          object={scene}
+        {/* The remote GLTF was removed to prevent blocking when the host is down. */}
+        <group
           scale={isMobile ? 1 : 1.5}
           position={isMobile ? [0, -3.25, -2.2] : [0, -3.25, -1.5]}
         >
+          {/* Simple placeholder mesh instead of the external model */}
+          <mesh>
+            <boxGeometry args={[1.6, 0.1, 1]} />
+            <meshStandardMaterial color="#111827" />
+          </mesh>
+
           <Html
             transform
             distanceFactor={1.17}
-            position={[0, 1.56, -1.4]}
+            position={[0, 0.7, 0]}
             rotation-x={-0.256}
           >
-            {!isIframeLoaded && (
-              <div className="flex items-center justify-center w-[1024px] h-[670px] bg-black">
-                <span className="text-gray-100 text-lg animate-pulse">
-                  Loading website...
-                </span>
-              </div>
-            )}
-            <iframe
-              className="w-[1024px] h-[670px] border-none"
-              src="https://lekene.et/"
-              onLoad={() => setIsIframeLoaded(true)}
-              style={{ display: isIframeLoaded ? "block" : "none" }}
-            />
+            <div className="flex items-center justify-center w-[512px] h-[320px] bg-black">
+              <span className="text-gray-100 text-lg text-center">
+                3D model unavailable — host down. Placeholder shown.
+              </span>
+            </div>
           </Html>
-        </primitive>
+        </group>
 
         {/* ✅ Responsive Text */}
         <Text
@@ -119,8 +117,6 @@ const MacBookComputer = () => {
   );
 };
 
-useGLTF.preload(
-  "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf"
-);
+// The GLTF preload was removed because the remote file is unreliable.
 
 export default MacBookComputer;

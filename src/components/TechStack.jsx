@@ -11,11 +11,13 @@ import {
   git,
   figma,
   laravel,
-  redis
+  redis,
+  typescript
 
 } from "../assets";
 
 const technologies = [
+  { name: "TypeScript", icon: typescript, category: "frontend" },
   { name: "JavaScript", icon: javascript, category: "frontend" },
   { name: "React JS", icon: reactjs, category: "frontend" },
   { name: "Redux Toolkit", icon: redux, category: "frontend" },
