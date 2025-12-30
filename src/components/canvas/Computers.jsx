@@ -1,24 +1,116 @@
-import { Canvas } from "@react-three/fiber";
-import { useState, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useRef, useState, useMemo } from "react";
 import {
-  Text,
-  Html,
   Float,
   PresentationControls,
+  Stars,
   ContactShadows,
+  Trail,
   Preload,
 } from "@react-three/drei";
-import Loader from "../Loader"; // Your custom loader
+import * as THREE from "three";
+import Loader from "../Loader";
 
-const MacBookModel = ({ setLoading, isMobile }) => {
-  // The GLTF model was hosted remotely and sometimes fails to resolve
-  // (net::ERR_NAME_NOT_RESOLVED). To avoid the portfolio hanging when
-  // the host is down, we no longer fetch the remote model here. Instead
-  // render a lightweight placeholder. If you want to re-enable the
-  // model later, restore the useGLTF call and the primitive below.
-  // no iframe/model loading state needed for placeholder
+/* =========================
+   Subtle Background Shooting Star
+========================= */
+const ShootingStar = ({ delay = 0 }) => {
+  const ref = useRef();
+  const speed = useMemo(() => Math.random() * 0.05 + 0.03, []);
 
-  // Make sure loader is dismissed even when the model isn't loaded.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (ref.current) {
+        ref.current.position.set(
+          -18,
+          Math.random() * 6 + 4,
+          -20 // VERY IMPORTANT → far behind text
+        );
+      }
+    }, delay);
+    return () => clearTimeout(t);
+  }, [delay]);
+
+  useFrame(() => {
+    if (!ref.current) return;
+
+    ref.current.position.x += speed;
+    ref.current.position.y -= speed * 0.6;
+
+    if (ref.current.position.x > 18) {
+      ref.current.position.set(
+        -18,
+        Math.random() * 6 + 4,
+        -20
+      );
+    }
+  });
+
+  return (
+    <Trail
+      width={1.2}
+      length={6}
+      color="#6ffcff"
+      attenuation={(t) => t * t}
+    >
+      <mesh ref={ref}>
+        <sphereGeometry args={[0.08, 8, 8]} />
+        <meshBasicMaterial
+          color="#6ffcff"
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
+    </Trail>
+  );
+};
+
+/* =========================
+   Smooth Cursor Camera Rig
+========================= */
+const CameraRig = ({ isMobile }) => {
+  const { camera } = useThree();
+  const mouse = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const move = (e) => {
+      mouse.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouse.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
+    };
+
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, [isMobile]);
+
+  useFrame(() => {
+    if (isMobile) return;
+
+    const targetX = mouse.current.x * 0.4;
+    const targetY = mouse.current.y * 0.25;
+
+    camera.position.x = THREE.MathUtils.lerp(
+      camera.position.x,
+      targetX,
+      0.04
+    );
+    camera.position.y = THREE.MathUtils.lerp(
+      camera.position.y,
+      targetY,
+      0.04
+    );
+
+    camera.lookAt(0, 0, 0);
+  });
+
+  return null;
+};
+
+/* =========================
+   Scene Content
+========================= */
+const SpaceScene = ({ isMobile, setLoading }) => {
   useEffect(() => {
     setLoading(false);
   }, [setLoading]);
@@ -26,97 +118,78 @@ const MacBookModel = ({ setLoading, isMobile }) => {
   return (
     <PresentationControls
       global
-      rotation={[0.13, 0.1, 0]}
-      polar={[-0.2, 0.2]}
-      azimuth={[-0.5, 0.5]}
-      config={{ mass: 2, tension: 400 }}
+      enabled={false} // IMPORTANT: prevents fight with camera
     >
-      <Float rotationIntensity={0.2}>
-        <rectAreaLight
-          width={2.5}
-          height={1.65}
-          color={"#ff6900"}
-          rotation={[0.1, Math.PI, 0]}
-          position={[0, 0.55, -1.15]}
+      <Float
+        speed={1}
+        rotationIntensity={0.15}
+        floatIntensity={0.3}
+      >
+        <Stars
+          radius={140}
+          depth={80}
+          count={isMobile ? 1800 : 6500}
+          factor={6}
+          saturation={0}
+          fade
+          speed={0.6}
         />
 
-        {/* The remote GLTF was removed to prevent blocking when the host is down. */}
-        <group
-          scale={isMobile ? 1 : 1.5}
-          position={isMobile ? [0, -3.25, -2.2] : [0, -3.25, -1.5]}
-        >
-          {/* Simple placeholder mesh instead of the external model */}
-          <mesh>
-            <boxGeometry args={[1.6, 0.1, 1]} />
-            <meshStandardMaterial color="#111827" />
-          </mesh>
-
-          <Html
-            transform
-            distanceFactor={1.17}
-            position={[0, 0.7, 0]}
-            rotation-x={-0.256}
-          >
-            <div className="flex items-center justify-center w-[512px] h-[320px] bg-black">
-              <span className="text-gray-100 text-lg text-center">
-                3D model unavailable — host down. Placeholder shown.
-              </span>
-            </div>
-          </Html>
-        </group>
-
-        {/* ✅ Responsive Text */}
-        <Text
-          font="./Bangers-Regular.ttf"
-          fontSize={isMobile ? 0.2 : 0.3}
-          position={isMobile ? [1.6, -1.5, 0.1] : [2.7, -0.7, 0.7]}
-          rotation-y={-1.25}
-          maxWidth={isMobile ? 1 : 4}
-          textAlign="center"
-        >
-          👈Go on,give it a spin{"\n"}
-          just don’t drop it💥
-        </Text>
+        {!isMobile && (
+          <>
+            <ShootingStar delay={2000} />
+            <ShootingStar delay={6000} />
+            <ShootingStar delay={12000} />
+          </>
+        )}
       </Float>
     </PresentationControls>
   );
 };
 
+/* =========================
+   Main Hero Canvas
+========================= */
 const MacBookComputer = () => {
-  const [isLoading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const mediaQuery = window.matchMedia("(max-width: 768px)");
-      setIsMobile(mediaQuery.matches);
-
-      const handleMediaQueryChange = (event) => {
-        setIsMobile(event.matches);
-      };
-
-      mediaQuery.addEventListener("change", handleMediaQueryChange);
-      return () => {
-        mediaQuery.removeEventListener("change", handleMediaQueryChange);
-      };
-    }
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const cb = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", cb);
+    return () => mq.removeEventListener("change", cb);
   }, []);
 
   return (
     <div className="relative w-full h-screen">
-      {isLoading && <Loader />}
-      <Canvas style={{ touchAction: "none" }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+      {loading && <Loader />}
+
+      <Canvas
+        camera={{ position: [0, 0, 7], fov: 45 }}
+        style={{ touchAction: "none" }}
+      >
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[8, 8, 5]} intensity={1.2} />
+
+        <CameraRig isMobile={isMobile} />
+
+        <SpaceScene
+          isMobile={isMobile}
+          setLoading={setLoading}
+        />
+
+        <ContactShadows
+          position={[0, -1.5, 0]}
+          opacity={0.25}
+          blur={3}
+        />
 
         <Preload all />
-        <MacBookModel isMobile={isMobile} setLoading={setLoading} />
-        <ContactShadows position-y={-1.4} opacity={0.4} blur={2.4} />
       </Canvas>
     </div>
   );
 };
-
-// The GLTF preload was removed because the remote file is unreliable.
 
 export default MacBookComputer;
