@@ -1,16 +1,24 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState } from "react"
 import { styles } from "../style"
 import { experiences } from "../constants/index.js"
 import { SectionWrapper } from "../hoc"
 import { textVariant, fadeIn } from "../utils/motion"
 
 const ExperienceCard = ({ experience, index }) => {
+  const [showAll, setShowAll] = useState(false)
+
+  const handleToggle = () => setShowAll(prev => !prev)
+
+  const handleShow = () => setShowAll(true)
+  const handleHide = () => setShowAll(false)
+
   return (
     <motion.div variants={fadeIn("right", "spring", index * 0.5, 0.75)} className="relative pl-6 pb-6 group">
       {/* Enhanced Timeline line with glass effect */}
-      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/30 to-transparent backdrop-blur-sm" />
+      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/30 to-transparent" />
 
       {/* Floating particles around timeline */}
       <div className="absolute left-[-10px] top-4 w-1 h-1 bg-cyan-400/60 rounded-full animate-pulse" />
@@ -19,7 +27,7 @@ const ExperienceCard = ({ experience, index }) => {
       {/* Enhanced Timeline dot with glass effect */}
       <motion.div
         className="absolute w-3 h-3 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 -left-1.5 top-2 z-10
-                   border border-white/30 backdrop-blur-sm shadow-lg"
+                   border border-white/30 shadow-lg"
         animate={{
           scale: [1, 1.3, 1],
           boxShadow: ["0 0 0 0 rgba(34,211,238,0.8)", "0 0 0 8px rgba(34,211,238,0)", "0 0 0 0 rgba(34,211,238,0)"],
@@ -30,14 +38,12 @@ const ExperienceCard = ({ experience, index }) => {
       <motion.div
         className="relative overflow-hidden p-4 rounded-xl border border-white/10 
                    bg-gradient-to-br from-white/5 via-white/10 to-white/5 
-                   backdrop-blur-xl shadow-2xl transition-all duration-700 
+                   shadow-2xl transition-all duration-700 
                    hover:shadow-[0_8px_32px_rgba(0,255,255,0.15),0_0_0_1px_rgba(255,255,255,0.1)]
                    hover:border-white/20 w-full"
         whileHover={{
           y: -8,
           scale: 1.02,
-          rotateX: 5,
-          rotateY: 5,
         }}
         style={{
           transformStyle: "preserve-3d",
@@ -64,13 +70,13 @@ const ExperienceCard = ({ experience, index }) => {
           transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
         />
 
-        <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-radial from-cyan-400/10 to-transparent rounded-full blur-xl" />
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-radial from-pink-400/10 to-transparent rounded-full blur-xl" />
+        <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-radial from-cyan-400/10 to-transparent rounded-full" />
+        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-radial from-pink-400/10 to-transparent rounded-full" />
 
         <div className="relative flex items-center gap-3 mb-3 z-10">
           <motion.div
             className="w-10 h-10 rounded-lg flex items-center justify-center 
-                       border border-white/20 backdrop-blur-md bg-white/5
+                       border border-white/20 bg-white/5
                        shadow-inner"
             style={{ background: `linear-gradient(135deg, ${experience.iconBg}40, ${experience.iconBg}20)` }}
             whileHover={{
@@ -99,7 +105,7 @@ const ExperienceCard = ({ experience, index }) => {
 
         <motion.div
           className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full 
-                     bg-white/5 border border-white/10 backdrop-blur-md relative z-10"
+                     bg-white/5 border border-white/10 relative z-10"
           whileHover={{ scale: 1.05 }}
         >
           <motion.span
@@ -110,10 +116,14 @@ const ExperienceCard = ({ experience, index }) => {
           <span className="text-gray-200/90 text-xs font-medium">{experience.date}</span>
         </motion.div>
 
-        <ul className="relative z-10 space-y-2">
-          {experience.points.slice(0, 3).map((point, i) => (
+        <ul
+          className="relative z-10 space-y-2"
+          onMouseEnter={handleShow}
+          onMouseLeave={handleHide}
+        >
+          {(showAll ? experience.points : experience.points.slice(0, 3)).map((point, i) => (
             <motion.li
-              key={i}
+              key={`${experience.company_name}-${point.slice(0, 30)}`}
               className="text-gray-100/90 text-xs leading-relaxed pl-3 relative 
                          before:content-['▸'] before:absolute before:left-0 before:text-cyan-400/80
                          before:text-sm hover:text-white transition-colors duration-300"
@@ -121,32 +131,35 @@ const ExperienceCard = ({ experience, index }) => {
               whileInView={{ opacity: 1, x: 0 }}
               whileHover={{ x: 2 }}
               transition={{
-                delay: i * 0.1,
+                delay: i * 0.06,
                 duration: 0.3,
               }}
               viewport={{ once: true }}
             >
-              {point.length > 80 ? `${point.substring(0, 80)}...` : point}
+              {point.length > 160 && showAll ? `${point}` : point.length > 80 ? `${point.substring(0, 80)}...` : point}
             </motion.li>
           ))}
+
           {experience.points.length > 3 && (
-            <motion.div
-              className="text-cyan-400/60 text-xs pl-3 font-medium"
+            <motion.button
+              type="button"
+              onClick={handleToggle}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleToggle()}
+              className="text-cyan-400/60 text-xs pl-3 font-medium bg-transparent border-0 p-0 cursor-pointer"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.04 }}
             >
-              +{experience.points.length - 3} more achievements
-            </motion.div>
+              {showAll ? 'Show less' : `+${experience.points.length - 3} more achievements`}
+            </motion.button>
           )}
         </ul>
 
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent 
-                     opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/6 to-transparent 
+                     opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none
                      transform -skew-x-12"
           initial={{ x: "-100%" }}
-          whileHover={{ x: "100%" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         />
       </motion.div>
@@ -178,7 +191,7 @@ const Experience = () => {
         transition={{ duration: 1 }}
       >
         {experiences.map((exp, index) => (
-          <ExperienceCard key={`experience-${index}`} experience={exp} index={index} />
+          <ExperienceCard key={`${exp.company_name}-${exp.title}`} experience={exp} index={index} />
         ))}
       </motion.div>
     </>

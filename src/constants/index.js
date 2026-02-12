@@ -110,18 +110,19 @@ const technologies = [
 
 const experiences = [
  {
-    title: "Three.js and Frontend developer (Three.js + Next.js)",
-    company_name: "IDEEZA",
-    icon: ideeza,
-    iconBg: "#123456",
-    date: "2025 - Present",
-    points: [
-      "Contributed to a web-based PCB and 3D module editor platform",
-      "Worked extensively with Three.js for 3D visualization and interactive UI components",
-      "Debugged complex 3D scene, rendering, and canvas interaction behavior",
-      "Applied strong problem-solving and issue-identification skills throughout development",
-      "Collaborated with cross-functional teams to deliver high-quality, scalable solutions",
-    ],
+   title: "Frontend Performance & Three.js Developer (Three.js + Next.js)",
+company_name: "IDEEZA",
+icon: ideeza,
+iconBg: "#123456",
+date: "2025 - Present",
+points: [
+  "Contributed to the development and continuous enhancement of a web-based PCB and 3D module editor platform used for complex electronics design workflows",
+  "Engineered and optimized Three.js rendering systems for large, performance-intensive scenes, improving interaction responsiveness and stability",
+  "Diagnosed and resolved CPU, memory, and WebGL-related bottlenecks, reducing rendering lag and preventing context loss in heavy-use scenarios",
+  "Designed and refined interactive canvas behaviors including object selection, camera controls, drag-and-drop, and multi-element manipulation",
+  "Collaborated with backend, QA, and product teams to deliver scalable features while maintaining performance and architectural consistency",
+]
+
   },
   {
     title: "Full Stack Developer (Laravel + React TS)",

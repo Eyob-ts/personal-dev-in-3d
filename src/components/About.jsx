@@ -1,7 +1,7 @@
 "use client"
 
 import { Tilt } from "react-tilt"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion" // eslint-disable-line no-unused-vars
 
 import { styles } from "../style"
 import { services } from "../constants"
@@ -26,7 +26,7 @@ const ServiceCard = ({ index, title, icon }) => {
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white/10 to-transparent"></div>
             {Array.from({ length: 15 }).map((_, i) => (
               <div
-                key={i}
+                key={`streak-${i}-${Date.now()}-${Math.random()}`}
                 className="absolute w-0.5 bg-gradient-to-t from-white/30 to-white/10 rounded-full"
                 style={{
                   left: `${5 + i * 6}%`,
@@ -43,7 +43,7 @@ const ServiceCard = ({ index, title, icon }) => {
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {Array.from({ length: 6 }).map((_, i) => (
               <motion.div
-                key={i}
+                key={`particle-${i}-${Date.now()}-${Math.random()}`}
                 className="absolute w-1 h-1 bg-white/40 rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
@@ -84,7 +84,7 @@ const ServiceCard = ({ index, title, icon }) => {
 };
 
 
-const About = () => {
+const AboutComponent = () => {
   return (
     <>
       <div className="relative z-1">
@@ -100,26 +100,35 @@ const About = () => {
   variants={fadeIn("", "", 0.1, 2)}
   className="mt-3 text-secondary font-mono text-[17px] max-w-full leading-[30px]"
 >
-  Hey there! I'm <span className="text-blue-400 font-serif">Eyob Teshome (Yob)</span>, your friendly neighborhood{" "}
-  <span className="text-blue-400">full-stack web developer</span>! I whip up magic with the{" "}
-  <span className="text-blue-300">MERN stack</span>, bring <span className="text-blue-400">3D models</span> to life
-  using <span className="text-blue-400">Three.js</span>, and tame the robust{" "}
-  <span className="text-blue-400">Laravel</span> framework like a pro. I graduated in{" "}
-  <span className="text-accent">Information Systems</span>, and I'm all about crafting applications that are as
-  stylish as they are functional. 
+ Hey there! I'm <span className="text-blue-400 font-serif">Eyob Teshome (Yob)</span>, a passionate{" "}
+<span className="text-blue-400">full-stack developer</span> focused on building scalable and
+high-performance web applications.
 
-  Recently, I've developed a strong interest in the world of{" "}
-  <span className="text-blue-400">Artificial Intelligence</span> and I'm eager to learn everything I can about it.
-  Right now, I'm diving into{" "}
-  <span className="text-blue-400">MCP (Model Context Protocol)</span> — exploring how it connects AI models,
-  applications, and context in powerful new ways. I’m excited to expand my skills in this field and see how AI can
-  enhance modern web development.
+I work mainly with <span className="text-blue-300">Next js </span>, {" "}
+<span className="text-blue-300">React (TypeScript)</span>, {" "}
+<span className="text-blue-400">Three.js</span>, and{" "}
+ <span className="text-blue-300">Laravel</span>,{" "}
+developing complex systems including ERP platforms
+and performance-intensive 3D web applications.
 
-  When I'm not busy coding, you'll find me on a{" "}
-  <span className="text-highlight">coffee walk ☕</span> — because let's be real, great ideas brew best over a cup
-  of delicious Ethiopian coffee! I thrive on the thrill of{" "}
-  <span className="text-blue-500">responsibility</span>, always eager to tackle new challenges and make technology
-  work wonders. So, if you've got wild web, app, or future AI ideas, let's join forces and turn them into reality!
+Recently, I’ve been diving deep into{" "}
+<span className="text-blue-400">frontend performance engineering</span> — analyzing CPU and memory
+usage, optimizing rendering pipelines, and improving stability in large-scale WebGL and PCB
+applications. I enjoy solving tough technical problems and turning slow, heavy systems into smooth,
+efficient experiences.
+
+I’m also exploring how modern applications integrate with{" "}
+<span className="text-blue-400">Artificial Intelligence</span>, learning about concepts like{" "}
+<span className="text-blue-400">Model Context Protocol (MCP)</span> and how AI can enhance real-world
+software systems.
+
+When I’m not coding, you’ll probably find me on a{" "}
+<span className="text-highlight">coffee walk ☕</span> — because great ideas (and great performance fixes)
+usually start with Ethiopian coffee.
+
+If you’re building something ambitious and need someone who cares about performance, scalability,
+and clean architecture — let’s build it.
+
 </motion.p>
 
 
@@ -159,4 +168,5 @@ const About = () => {
   )
 }
 
-export default SectionWrapper(About, "about")
+const About = SectionWrapper(AboutComponent, "about")
+export default About
