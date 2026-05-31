@@ -1,67 +1,35 @@
 
-
 import { BrowserRouter } from "react-router-dom";
-import { Suspense, useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
+import { ExperienceProvider } from "./app/providers/ExperienceProvider";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Feedbacks from "./components/Feedbacks";
 import Contact from "./components/Contact";
 import Experience from "./components/Experience";
-import Loader from "./components/Loader"; // Import the SVG loader
-import ParticleBackground from "./components/ParticleBackground";
 import TechStack from "./components/TechStack";
 import Projects from "./components/projects";
 import ChatWidget from "./components/ChatWidget";
 
-
-
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading (replace with actual loading logic)
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Simulated delay
-
-    return () => clearTimeout(timeout);
-  }, []);
-
   return (
-    <>
-    
-    <BrowserRouter>
-      <div className="relative z-0 bg-[#000000]">
-
-        {loading ? ( // Show loader while loading
-          <Loader />
-        ) : (
-          <>
-              {/* <TestParticles/>  */}
-            <div className=" bg-cover bg-no-repeat bg-center"> 
-            
-              {/* <Navbar /> */}
+    <ExperienceProvider>
+      <BrowserRouter>
+        <div className="relative z-0 bg-[#000000]">
+          <div className="bg-cover bg-no-repeat bg-center">
               <Hero />
-            </div>
-            
-             
-            <About />
-            <Experience />
-            <TechStack />
-            <Projects />
-            
-            {/* <Feedbacks /> */}
-            
-            <div className="relative z-0">
-              <Contact />
-                 <ChatWidget />
-            </div>
-          </>
-        )}
-      </div>
-    </BrowserRouter>
-    </>
+          </div>
+
+          <About />
+          <Experience />
+          <TechStack />
+          <Projects />
+
+          <div className="relative z-0">
+            <Contact />
+            <ChatWidget />
+          </div>
+        </div>
+      </BrowserRouter>
+    </ExperienceProvider>
   );
 };
 

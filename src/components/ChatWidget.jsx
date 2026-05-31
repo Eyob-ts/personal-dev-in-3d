@@ -65,7 +65,7 @@ const ChatWidget = () => {
       }
 
       setMessages([...newMessages, botMessage])
-    } catch (error) {
+    } catch {
       // Fallback message if API fails
       const errorMessage = {
         sender: "bot",

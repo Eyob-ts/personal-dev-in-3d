@@ -1,24 +1,18 @@
 "use client"
 
-import { Tilt } from "react-tilt"
-import { motion } from "framer-motion" // eslint-disable-line no-unused-vars
+import { motion } from "framer-motion"
 
 import { styles } from "../style"
 import { services } from "../constants"
 import { fadeIn } from "../utils/motion"
 import { SectionWrapper } from "../hoc"
-import ParticleBackground from "./ParticleBackground"
+import TiltCard from "./ui/TiltCard"
 
 const ServiceCard = ({ index, title, icon }) => {
   return (
-    <Tilt className="xs:w-[250px] w-full">
+    <TiltCard maxRotation={4} scale={1.018} className="xs:w-[250px] w-full">
       <motion.div variants={fadeIn("right", "spring", 0.5 * index, 0.75)}>
         <div
-          options={{
-            max: 45,
-            scale: 1.05,
-            speed: 450,
-          }}
           className="relative overflow-hidden bg-gradient-to-br from-blue-400/20 via-blue-600/20 to-blue-900/20 hover:from-blue-400/30 hover:via-blue-600/30 hover:to-blue-900/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] font-mono rounded-[20px] py-5 px-12 min-h-[190px] flex justify-evenly items-center flex-col transition-all duration-700 border border-white/10 backdrop-blur-xl before:absolute before:inset-0 before:bg-gradient-to-t before:from-white/5 before:to-transparent before:pointer-events-none glass-card"
         >
           {/* Subtle vertical streaks for glass effect */}
@@ -26,14 +20,14 @@ const ServiceCard = ({ index, title, icon }) => {
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white/10 to-transparent"></div>
             {Array.from({ length: 15 }).map((_, i) => (
               <div
-                key={`streak-${i}-${Date.now()}-${Math.random()}`}
+                key={`streak-${i}`}
                 className="absolute w-0.5 bg-gradient-to-t from-white/30 to-white/10 rounded-full"
                 style={{
                   left: `${5 + i * 6}%`,
-                  bottom: `${Math.floor(Math.random() * 4) + 1}px`,
-                  height: `${20 + Math.floor(Math.random() * 20)}px`,
-                  transform: `rotate(${-20 + Math.floor(Math.random() * 40)}deg)`,
-                  opacity: 0.4 + Math.random() * 0.3,
+                  bottom: `${(i % 4) + 1}px`,
+                  height: `${20 + (i % 5) * 4}px`,
+                  transform: `rotate(${-18 + (i % 7) * 6}deg)`,
+                  opacity: 0.42 + (i % 3) * 0.08,
                 }}
               />
             ))}
@@ -43,11 +37,11 @@ const ServiceCard = ({ index, title, icon }) => {
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {Array.from({ length: 6 }).map((_, i) => (
               <motion.div
-                key={`particle-${i}-${Date.now()}-${Math.random()}`}
+                key={`particle-${i}`}
                 className="absolute w-1 h-1 bg-white/40 rounded-full"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${12 + i * 14}%`,
+                  top: `${18 + (i % 3) * 24}%`,
                 }}
                 animate={{
                   x: [0, 15, -10, 0],
@@ -55,7 +49,7 @@ const ServiceCard = ({ index, title, icon }) => {
                   opacity: [0.3, 0.8, 0.2, 0.5],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 2,
+                  duration: 4 + (i % 3) * 0.6,
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                   delay: i * 0.6,
@@ -79,7 +73,7 @@ const ServiceCard = ({ index, title, icon }) => {
           </h3>
         </div>
       </motion.div>
-    </Tilt>
+    </TiltCard>
   );
 };
 
@@ -87,10 +81,6 @@ const ServiceCard = ({ index, title, icon }) => {
 const AboutComponent = () => {
   return (
     <>
-      <div className="relative z-1">
-        <ParticleBackground />
-      </div>
-
       <motion.div>
         <p className={styles.sectionSubText}>Introduction</p>
         <h2 className={styles.sectionHeadText}>OverView.</h2>

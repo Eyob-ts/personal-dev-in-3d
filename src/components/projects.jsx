@@ -5,20 +5,18 @@ import { styles } from "../style"
 import { projects } from "../constants"
 import { SectionWrapper } from "../hoc"
 import { textVariant, fadeIn } from "../utils/motion"
-import { Tilt } from "react-tilt"
 import { github } from "../assets"
+import Magnetic from "./ui/Magnetic"
+import TiltCard from "./ui/TiltCard"
 
 const ProjectCard = ({ project, index }) => {
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
-      <Tilt
-        options={{
-          max: 25,
-          scale: 1.05,
-          speed: 450,
-        }}
+      <TiltCard
+        maxRotation={5}
+        scale={1.018}
         className={`
-          relative p-5 rounded-2xl sm:w-[360px] w-full h-full
+          group relative p-5 rounded-2xl sm:w-[360px] w-full h-full
           bg-white/5 backdrop-blur-2xl
           border border-white/10
           shadow-lg shadow-black/40
@@ -27,6 +25,7 @@ const ProjectCard = ({ project, index }) => {
           overflow-hidden
         `}
       >
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_var(--tilt-x,50%)_var(--tilt-y,50%),rgba(255,255,255,0.16),transparent_34%)]" />
         {/* Water droplets overlay */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Large water droplets */}
@@ -69,14 +68,18 @@ const ProjectCard = ({ project, index }) => {
           />
           {/* GitHub Button */}
           <div className="absolute inset-0 flex justify-end m-3">
-            <div
+            <Magnetic
+              as="button"
+              type="button"
+              strength={5}
+              radius={120}
               onClick={() => window.open(project.source_code_link, "_blank")}
               className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer
               bg-black/40 backdrop-blur-md border border-white/20
               hover:bg-cyan-500/20 transition-all duration-300"
             >
               <img src={github || "/placeholder.svg"} alt="github" className="w-1/2 h-1/2 object-contain" />
-            </div>
+            </Magnetic>
           </div>
         </div>
 
@@ -104,7 +107,7 @@ const ProjectCard = ({ project, index }) => {
             </span>
           ))}
         </div>
-      </Tilt>
+      </TiltCard>
     </motion.div>
   )
 }
